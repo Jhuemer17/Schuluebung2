@@ -15,7 +15,7 @@ import java.io.IOException;
 public class NumberTester {
 
     private String pfad;
-    
+
     private NumberTest oddEvenTester;
     private NumberTest primeTester;
     private NumberTest palindromeTester;
@@ -37,7 +37,6 @@ public class NumberTester {
         this.palindromeTester = palindromeTester;
     }
 
-
     public void testFile() {
         try (BufferedReader br = new BufferedReader(new FileReader(pfad))) {
             String x = br.readLine();
@@ -47,9 +46,14 @@ public class NumberTester {
 
                 switch (index) {
                     case 1:
-                        System.out.println("OddEvenTester: "+oddEvenTester.testNumber(Integer.parseInt(line[1])));
+                        System.out.println("OddEvenTester: " + oddEvenTester.testNumber(Integer.parseInt(line[1])));
                         break;
-                        
+                    case 2:
+                        System.out.println("PrimeTester: " + primeTester.testNumber(Integer.parseInt(line[1])));
+                        break;
+                    case 3:
+                        System.out.println("PalindromeTester: " + palindromeTester.testNumber(Integer.parseInt(line[1])));
+                        break;
                 }
             }
         } catch (IOException ex) {
