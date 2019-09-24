@@ -40,6 +40,16 @@ public class Number {
         protected CalculationOperation subtract;
         protected CalculationOperation multiply;
         protected CalculationOperation divide;
+
+        public AbstractCalculator(CalculationOperation add, CalculationOperation subtract, CalculationOperation multiply, CalculationOperation divide) {
+            this.add = add;
+            this.subtract = subtract;
+            this.multiply = multiply;
+            this.divide = divide;
+        }
+        
+        
+        
                 
     }
 }
