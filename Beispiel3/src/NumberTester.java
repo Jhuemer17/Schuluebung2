@@ -30,13 +30,16 @@ public class NumberTester {
     }
 
     public void setPrimeTester(NumberTest primeTester) {
+        this.primeTester = primeTester;
     }
 
     public void setPalindromeTester(NumberTest palindromeTester) {
+        this.palindromeTester = palindromeTester;
     }
 
+
     public void testFile() {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(pfad))) {
             String x = br.readLine();
             for (int i = 0; i < Integer.parseInt(x); i++) {
                 String[] line = br.readLine().split(" ");
@@ -44,6 +47,8 @@ public class NumberTester {
 
                 switch (index) {
                     case 1:
+                        System.out.println("OddEvenTester: "+oddEvenTester.testNumber(Integer.parseInt(line[1])));
+                        break;
                         
                 }
             }
