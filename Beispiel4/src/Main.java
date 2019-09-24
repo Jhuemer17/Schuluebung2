@@ -20,36 +20,59 @@ public class Main {
         m1.initRationalCalculator();
         m1.startProgram();
     }
-    private void startProgram()
-    {
+
+    private void startProgram() {
         Scanner input = new Scanner(System.in);
 
         int eing1 = 0;
         while (eing1 != 99) {
             printCalc();
             eing1 = input.nextInt();
-            Number tempA = makeNumber("x");
-            Number tempB = makeNumber("y");
+            Number tempB = new Number();
+            Number tempA = new Number();
+            if (eing1 != 4) {
+                tempA = makeNumber("x");
+                tempB = makeNumber("y");
+            }
             int eing2 = 0;
             switch (eing1) {
                 case 1:
                     do {
                         printOperation();
                         eing2 = input.nextInt();
-                    } while(eing2 == 5);
+                    } while (eing2 == 5);
                     switch (eing2) {
-                            case 1:
-                                Number erg = rc.add(tempA, tempB);
-                                System.out.println("");
-                                System.out.println("Solution:");
-                                System.out.println("a = "+erg.getA());
-                                System.out.println("b = "+erg.getB());
-                                break;
-                        }
+                        case 1:
+                            Number erg = rc.add.calc(tempA, tempB);
+                            printSolution(erg);
+                            break;
+                        case 2:
+                            erg = rc.subtract.calc(tempA, tempB);
+                            printSolution(erg);
+                            break;
+                        case 3:
+                            erg = rc.multiply.calc(tempA, tempB);
+                            printSolution(erg);
+                            break;
+                        case 4:
+                            erg = rc.divide.calc(tempA, tempB);
+                            printSolution(erg);
+                            break;
+                    }
+                    break;
+                case 2:
+                    
                     break;
 
             }
         }
+    }
+
+    private static void printSolution(Number erg) {
+        System.out.println("");
+        System.out.println("Solution:");
+        System.out.println("a = " + erg.getA());
+        System.out.println("b = " + erg.getB());
     }
 
     private static Number makeNumber(String a) {
@@ -113,13 +136,15 @@ public class Main {
         rc = new RationalCalculator(add, subtract, multiply, divide);
     }
 
-     public double ggT(double a, double b)
-     {
-         if(a==b|b==0)return a;
-         else return ggT(b,a%b);
-     }
-    public double kgv(double a, double b)
-    {
-        return a*(b/ggT(a,b));
+    public double ggT(double a, double b) {
+        if (a == b | b == 0) {
+            return a;
+        } else {
+            return ggT(b, a % b);
+        }
+    }
+
+    public double kgv(double a, double b) {
+        return a * (b / ggT(a, b));
     }
 }

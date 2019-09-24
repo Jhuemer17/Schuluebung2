@@ -17,6 +17,9 @@ public class Number {
         this.a = a;
         this.b = b;
     }
+
+    public Number() {
+    }
     
 
     public double getA() {
