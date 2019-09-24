@@ -9,6 +9,7 @@
  * @author Johannes Huemer
  */
 public class Number {
+
     private double a;
     private double b;
 
@@ -27,8 +28,18 @@ public class Number {
     public void setB(double b) {
         this.b = b;
     }
-    
-    public interface CalculationOperation{
+
+    public interface CalculationOperation {
+
         Number calc(Number x, Number y);
+    }
+
+    public abstract class AbstractCalculator {
+
+        protected CalculationOperation add;
+        protected CalculationOperation subtract;
+        protected CalculationOperation multiply;
+        protected CalculationOperation divide;
+                
     }
 }
