@@ -18,8 +18,12 @@ public class RationalCalculator extends AbstractCalculator {
     
 
     @Override
-    public Number add(Number a, Number b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Number add(Number x, Number y) {
+        double kgv = kgv(x.getB(), y.getB());
+                double ergA = (x.getA() * (kgv / x.getB())) + (y.getA() * (kgv / y.getB()));
+                double ergB = (kgv);
+
+                return new Number(ergA, ergB);
     }
 
     @Override
@@ -37,6 +41,14 @@ public class RationalCalculator extends AbstractCalculator {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
+     public double ggT(double a, double b)
+     {
+         if(a==b|b==0)return a;
+         else return ggT(b,a%b);
+     }
+    public double kgv(double a, double b)
+    {
+        return a*(b/ggT(a,b));
+    }
 
 }
