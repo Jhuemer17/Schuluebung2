@@ -8,6 +8,6 @@
  *
  * @author Johannes Huemer
  */
-public class VectorCalculator extends AbstractCalculator{
+public class VectorCalculator{
     
 }

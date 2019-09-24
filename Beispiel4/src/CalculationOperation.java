@@ -8,7 +8,6 @@
  *
  * @author Johannes Huemer
  */
-public class ComplexCalculator{
-
-    
+public interface CalculationOperation {
+    Number calc(Number x, Number y);
 }

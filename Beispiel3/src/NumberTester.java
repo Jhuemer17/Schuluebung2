@@ -1,7 +1,9 @@
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +16,7 @@ import java.io.IOException;
  */
 public class NumberTester {
 
-    private String pfad;
+    String pfad;
 
     private NumberTest oddEvenTester;
     private NumberTest primeTester;
@@ -38,7 +40,7 @@ public class NumberTester {
     }
 
     public void testFile() {
-        try (BufferedReader br = new BufferedReader(new FileReader(pfad))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
             String x = br.readLine();
             for (int i = 0; i < Integer.parseInt(x); i++) {
                 String[] line = br.readLine().split(" ");
@@ -48,7 +50,7 @@ public class NumberTester {
                     case 1:
                         boolean a = oddEvenTester.testNumber(Integer.parseInt(line[1]));
                         if(a)System.out.println("EVEN");
-                        else System.out.println("NO EVEN");
+                        else System.out.println("ODD");
                         break;
                     case 2:
                         boolean b = primeTester.testNumber(Integer.parseInt(line[1]));

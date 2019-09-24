@@ -8,7 +8,7 @@
  *
  * @author Johannes Huemer
  */
-public class ComplexCalculator{
-
-    
+public interface PrimeSieve {
+        public boolean isPrime(int p);
+        public void printPrimes();
 }
