@@ -46,13 +46,19 @@ public class NumberTester {
 
                 switch (index) {
                     case 1:
-                        System.out.println("OddEvenTester: " + oddEvenTester.testNumber(Integer.parseInt(line[1])));
+                        boolean a = oddEvenTester.testNumber(Integer.parseInt(line[1]));
+                        if(a)System.out.println("EVEN");
+                        else System.out.println("NO EVEN");
                         break;
                     case 2:
-                        System.out.println("PrimeTester: " + primeTester.testNumber(Integer.parseInt(line[1])));
+                        boolean b = primeTester.testNumber(Integer.parseInt(line[1]));
+                        if(b)System.out.println("PRIME");
+                        else System.out.println("NO PRIME");
                         break;
                     case 3:
-                        System.out.println("PalindromeTester: " + palindromeTester.testNumber(Integer.parseInt(line[1])));
+                        boolean c = palindromeTester.testNumber(Integer.parseInt(line[1]));
+                        if(c)System.out.println("PALINDROME");
+                        else System.out.println("NO PALINDROME");
                         break;
                 }
             }
