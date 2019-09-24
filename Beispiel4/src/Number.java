@@ -27,4 +27,8 @@ public class Number {
     public void setB(double b) {
         this.b = b;
     }
+    
+    public interface CalculationOperation{
+        Number calc(Number x, Number y);
+    }
 }
