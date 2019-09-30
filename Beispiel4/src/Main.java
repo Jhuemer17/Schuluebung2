@@ -14,10 +14,12 @@ import java.util.Scanner;
 public class Main {
 
     RationalCalculator rc;
+    VectorCalculator vc;
 
     public static void main(String[] args) {
         Main m1 = new Main();
         m1.initRationalCalculator();
+        m1.initVectorCalculator();
         m1.startProgram();
     }
 
@@ -61,7 +63,28 @@ public class Main {
                     }
                     break;
                 case 2:
-                    
+                        do {
+                        printOperation();
+                        eing2 = input.nextInt();
+                    } while (eing2 == 5);
+                    switch (eing2) {
+                        case 1:
+                            Number erg = vc.add.calc(tempA, tempB);
+                            printSolution(erg);
+                            break;
+                        case 2:
+                            erg = vc.subtract.calc(tempA, tempB);
+                            printSolution(erg);
+                            break;
+                        case 3:
+                            erg = vc.multiply.calc(tempA, tempB);
+                            printVectorSolution(erg);
+                            break;
+                        case 4:
+                            erg = vc.divide.calc(tempA, tempB);
+                            printVectorSolution(erg);
+                            break;
+                    }
                     break;
 
             }
@@ -74,6 +97,12 @@ public class Main {
         System.out.println("a = " + erg.getA());
         System.out.println("b = " + erg.getB());
     }
+    private static void printVectorSolution(Number erg)
+    {
+        System.out.println("");
+        System.out.println("Solution:");
+        System.out.println("Vektorproduct = " + erg.getA());
+    }
 
     private static Number makeNumber(String a) {
         Scanner mk = new Scanner(System.in);
@@ -84,6 +113,9 @@ public class Main {
     }
 
     private static void printCalc() {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         System.out.println("Choose calculator:");
         System.out.println("1 - Relational calculator");
         System.out.println("2 - Vector calculator");
@@ -134,6 +166,36 @@ public class Main {
             }
         };
         rc = new RationalCalculator(add, subtract, multiply, divide);
+    }
+    private void initVectorCalculator()
+    {
+        CalculationOperation add = new CalculationOperation() {
+            @Override
+            public Number calc(Number x, Number y) {
+                return new Number(x.getA()+y.getA(), x.getB()+y.getB());
+            }
+        };
+        CalculationOperation subtract = new CalculationOperation() {
+            @Override
+            public Number calc(Number x, Number y) {
+                return new Number(x.getA()-y.getA(), x.getB()-y.getB());
+            }
+        };
+        CalculationOperation multiply = new CalculationOperation() {
+            @Override
+            public Number calc(Number x, Number y) {
+                double erg = x.getA()*y.getA()+x.getB()*y.getB();
+                return new Number(erg,erg);
+            }
+        };
+        CalculationOperation divide = new CalculationOperation() {
+            @Override
+            public Number calc(Number x, Number y) {
+                double erg = x.getA()/y.getA()+x.getB()/y.getB();
+                return new Number(erg,erg);
+            }
+        };
+        vc = new VectorCalculator(add, subtract, multiply, divide);
     }
 
     public double ggT(double a, double b) {
