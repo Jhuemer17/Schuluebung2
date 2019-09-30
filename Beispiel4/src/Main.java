@@ -1,6 +1,7 @@
 
 import com.oracle.xmlns.internal.webservices.jaxws_databinding.SoapBindingParameterStyle;
 import java.util.Scanner;
+import javafx.application.Platform;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,11 +16,13 @@ public class Main {
 
     RationalCalculator rc;
     VectorCalculator vc;
+    ComplexCalculator cc;
 
     public static void main(String[] args) {
         Main m1 = new Main();
         m1.initRationalCalculator();
         m1.initVectorCalculator();
+        m1.initComplexCalculator();
         m1.startProgram();
     }
 
@@ -63,7 +66,7 @@ public class Main {
                     }
                     break;
                 case 2:
-                        do {
+                    do {
                         printOperation();
                         eing2 = input.nextInt();
                     } while (eing2 == 5);
@@ -86,7 +89,35 @@ public class Main {
                             break;
                     }
                     break;
-
+                case 3:
+                    do {
+                        printOperation();
+                        eing2 = input.nextInt();
+                    } while (eing2 == 5);
+                    switch (eing2) {
+                        case 1:
+                            Number erg = cc.add.calc(tempA, tempB);
+                            printSolution(erg);
+                            break;
+                        case 2:
+                            erg = cc.subtract.calc(tempA, tempB);
+                            printSolution(erg);
+                            break;
+                        case 3:
+                            erg = cc.multiply.calc(tempA, tempB);
+                            printSolution(erg);
+                            break;
+                        case 4:
+                            erg = cc.divide.calc(tempA, tempB);
+                            printSolution(erg);
+                            break;
+                    }
+                    break;
+                case 4:
+                    eing1 = 99;
+                    break;
+                default:
+                    
             }
         }
     }
@@ -97,8 +128,8 @@ public class Main {
         System.out.println("a = " + erg.getA());
         System.out.println("b = " + erg.getB());
     }
-    private static void printVectorSolution(Number erg)
-    {
+
+    private static void printVectorSolution(Number erg) {
         System.out.println("");
         System.out.println("Solution:");
         System.out.println("Vektorproduct = " + erg.getA());
@@ -167,35 +198,68 @@ public class Main {
         };
         rc = new RationalCalculator(add, subtract, multiply, divide);
     }
-    private void initVectorCalculator()
-    {
+
+    private void initVectorCalculator() {
         CalculationOperation add = new CalculationOperation() {
             @Override
             public Number calc(Number x, Number y) {
-                return new Number(x.getA()+y.getA(), x.getB()+y.getB());
+                return new Number(x.getA() + y.getA(), x.getB() + y.getB());
             }
         };
         CalculationOperation subtract = new CalculationOperation() {
             @Override
             public Number calc(Number x, Number y) {
-                return new Number(x.getA()-y.getA(), x.getB()-y.getB());
+                return new Number(x.getA() - y.getA(), x.getB() - y.getB());
             }
         };
         CalculationOperation multiply = new CalculationOperation() {
             @Override
             public Number calc(Number x, Number y) {
-                double erg = x.getA()*y.getA()+x.getB()*y.getB();
-                return new Number(erg,erg);
+                double erg = x.getA() * y.getA() + x.getB() * y.getB();
+                return new Number(erg, erg);
             }
         };
         CalculationOperation divide = new CalculationOperation() {
             @Override
             public Number calc(Number x, Number y) {
-                double erg = x.getA()/y.getA()+x.getB()/y.getB();
-                return new Number(erg,erg);
+                double erg = x.getA() / y.getA() + x.getB() / y.getB();
+                return new Number(erg, erg);
             }
         };
         vc = new VectorCalculator(add, subtract, multiply, divide);
+    }
+
+    private void initComplexCalculator() {
+        CalculationOperation add = new CalculationOperation() {
+            @Override
+            public Number calc(Number x, Number y) {
+                return new Number(x.getA() + y.getA(), x.getB() + y.getB());
+            }
+        };
+        CalculationOperation subtract = new CalculationOperation() {
+            @Override
+            public Number calc(Number x, Number y) {
+                return new Number(x.getA() - y.getA(), x.getB() - y.getB());
+            }
+        };
+        CalculationOperation multiply = new CalculationOperation() {
+            @Override
+            public Number calc(Number x, Number y) {
+                double ergA = (x.getA() * y.getA()) - (y.getB() * x.getB());
+                double ergB = (x.getA() * y.getB()) + (x.getB() * y.getA());
+                return new Number(ergA, ergB);
+            }
+        };
+        CalculationOperation divide = new CalculationOperation() {
+            @Override
+            public Number calc(Number x, Number y) {
+                double tempA = (x.getA() * y.getA()) + (x.getB() * y.getB());
+                double tempB = (x.getB() * y.getA()) + (x.getA() * (y.getB() * (-1)));
+                double teiler = (y.getA() * y.getA()) + (y.getB() * y.getB());
+                return new Number(tempA / teiler, tempB / teiler);
+            }
+        };
+        cc = new ComplexCalculator(add, subtract, multiply, divide);
     }
 
     public double ggT(double a, double b) {
